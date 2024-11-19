@@ -2,7 +2,10 @@
 CC := gcc
 
 # Compiler Flags
-CFLAGS := -w -Wextra -pthread
+CFLAGS := -w -Wextra -pthread  # Không cần thêm -lm ở đây
+
+# Linker Flags (Đảm bảo -lm nằm ở đây)
+LDFLAGS := -lm
 
 # Directories
 CLIENT_DIR := client_side
@@ -29,7 +32,7 @@ $(CLIENT_EXEC): $(CLIENT_OBJS)
 
 # Build Server Executable
 $(SERVER_EXEC): $(SERVER_OBJS)
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) $(SERVER_OBJS) $(LDFLAGS) -o $@
 
 # Compile Source Files into Object Files
 %.o: %.c
