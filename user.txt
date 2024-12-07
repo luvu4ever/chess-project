@@ -4,3 +4,5 @@ thai 2
 dung1 1
 1 1
 2 2
+tÃest 2
+a 2
