@@ -377,10 +377,15 @@ bool validate_queen_move(wchar_t **board, int player, int x_moves, int y_moves, 
     if (!is_rect(move) && !is_diagonal(x_moves, y_moves)) {
         send(player, "e-queen", 4, 0);
         return false;
-    }
-    if (!is_rect_clear(board, move, x_moves, y_moves) || !is_diagonal_clear(board, move)) {
+    } else if (is_rect(move)) {
+    	  if (!is_rect_clear(board, move, x_moves, y_moves))
+           send(player, "e-31", 4, 0);
+            return false;
+    } else {
+      if (!is_diagonal(x_moves, y_moves)) {
         send(player, "e-31", 4, 0);
-        return false;
+      	return false;
+      }
     }
     if (eat_piece(board, move[2], move[3])) {
         send(player, "i-99", 4, 0);
